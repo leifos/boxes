@@ -1,0 +1,69 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+       Treasure Houses: Choose Treasure House
+{% endblock %}
+
+
+{% block navbar %}
+            {% include "base/navbar.html" %}
+{% endblock %}
+
+
+{% block content %}
+        <div class="well">
+    <h1>Choose a Treasure House</h1>
+        </div>
+
+    {% for g,l,gs in zipped_data %}
+
+        {% if forloop.first %}
+    <div class="row-fluid">
+        {% endif %}
+         <div class="span4">
+             <h3>{{g.name}}</h3>
+
+             {% if g.name == 'Game 1' %}
+                 <img src="{% static "images/houses.png"%}" width="150px">
+             {% else %}
+                 {% if l == 1 %}
+                    <img src="{% static "images/houses_lock.png"%}" width="150px">
+                 {% else %}
+                    <img src="{% static "images/houses.png"%}" width="150px">
+                 {% endif %}
+             {% endif %}
+{#             <p>{{g.desc}}</p><p>Average Gain/Time Ratio: {{g.ratio}}</p>#}
+                <p>Max Gems:{{gs}}</p>
+             <p><a class="btn btn-primary" href="/asg/start/{{g.id}}/">Play &raquo;</a></p>
+          </div><!--/span-->
+         {% if forloop.counter|divisibleby:"3" %}
+            </div>
+            {% if not forloop.last %}
+                <div class="row-fluid">
+             {% endif %}
+          {% endif %}
+         {% if forloop.last %}
+                </div>
+         {% endif %}
+    {% endfor %}
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
