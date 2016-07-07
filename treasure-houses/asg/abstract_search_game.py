@@ -3,7 +3,6 @@ __author__ = 'leif'
 import random
 from asg_generator import YieldGenerator, CueGenerator
 
-
 class ABSGame(object):
 
     def __init__(self, yield_generator, cue_generator, tokens=30, cq=2, ca=1, points=0, round_len = 10, id=0):
@@ -79,7 +78,7 @@ class ABSGame(object):
         cl = self.cgen.get_labels(self.round_len, yl)
         rl = []
         for i in range(self.round_len):
-            #print i
+            # print i
             rl.append(self._make_snippet(cl[i],yl[i],False))
 
         self.current_round = rl
@@ -96,6 +95,7 @@ class ABSGame(object):
 
 
     def _open_document(self):
+
 
         for i in range(self.round_len):
             r = self.current_round[i]
@@ -130,7 +130,8 @@ class ABSGame(object):
         data['ptokens'] = (self.tokens*100) / (self.tokens + self.tokens_spent)
         return data
 
-
+    def __getitem__(self, item):
+        return self.round_no
 
 
 

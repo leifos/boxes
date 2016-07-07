@@ -13,10 +13,11 @@ formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 event_logger_handler.setFormatter(formatter)
 event_logger.addHandler(event_logger_handler)
 
-def log_move_event(uid,game):
+def log_move_event(uid,game,is_over):
 
     gain_list = []
     round = game.current_round
+
     pos = 0
     for i in range(len(round)):
         r = round[i]
@@ -24,9 +25,18 @@ def log_move_event(uid,game):
             pos = pos + 1
         gain_list.append(str(r['gain']))
 
-    print gain_list
+    # print 'Gain List: {0} User Id: {1} Depth: {2}'.format(gain_list,uid,pos)
+    # print(game['round_no'])
 
     gain_str = ' '.join(gain_list)
+    round_no = game['round_no']
+    if(round_no == 1):
+        msg ='------------------------New Start Here-------------------------------'
+        msg += '\r\t\t\t\t\t\t\tUser Id: {0} Game Id: {1} Depth: {2} Gain List: {3} round:{4}'.format(uid, game.id, pos, gain_str,round_no)
+    else:
+         msg = '\r\t\t\t\t\t\t\tUser Id: {0} Game Id: {1} Depth: {2} Gain List: {3} round:{4}'.format(uid, game.id, pos, gain_str,round_no)
 
-    msg = 'MOVE {0} {1} {2} {3}'.format(uid, game.id, pos, gain_str)
+    if is_over == True:
+        msg += '\r\t\t\t\t\t\t\toooooooooooooooooooooooooo Complete Log ooooooooooooooooooooooooooooooo\r\r'
+
     event_logger.info(msg=msg)

@@ -10,7 +10,7 @@ from game import create_and_start_game, store_game, retrieve_game, end_game
 
 from log import log_move_event
 
-
+gameId = None
 
 def index(request):
     context = RequestContext(request, {})
@@ -23,6 +23,7 @@ def pick(request,username):
 
 
     lock=[0,1,1,1,1,1]
+    unlockScore=[0,35,45,40,45,45]
 
     maxHighScore = [0,0,0,0,0,0]
 
@@ -32,20 +33,20 @@ def pick(request,username):
             maxHighScore[count]=s.points
             count += 1
 
-    print maxHighScore
-
     for g in ge:
-        if g.name == "Game 1" and maxHighScore[0] >30:
+
+        if g.id == 1 and maxHighScore[0] >=35:
             lock[1] = 0
-        if g.name == "Game 2" and maxHighScore[1] >50:
+        if g.id == 2 and maxHighScore[1] >=45:
             lock[2] = 0
-        if g.name == "Game 3" and maxHighScore[2] >40:
+        if g.id == 3 and maxHighScore[2] >=40:
             lock[3] = 0
-        if g.name == "Game 4" and maxHighScore[3] >40:
+        if g.id == 4 and maxHighScore[3] >=45:
             lock[4] = 0
-        if g.name == "Game 5" and maxHighScore[4] >40:
+        if g.id == 5 and maxHighScore[4] >=45:
             lock[5] = 0
-    zipped_data = zip(ge,lock,maxHighScore)
+
+    zipped_data = zip(ge,lock,unlockScore,maxHighScore)
     context = RequestContext(request, {})
 
     return render_to_response('asg/pick.html', {'ge':ge,'lock':lock,'zipped_data':zipped_data}, context)
@@ -68,9 +69,13 @@ def startgame(request, num):
         context = RequestContext(request, {})
         session_id = request.session._get_or_create_session_key()
         game = create_and_start_game(int(num))
+
+        global gameId
+        gameId = int(num)
+
         data = game.get_game_state()
         store_game(session_id, game)
-        response = render_to_response('asg/game.html', {'sid':session_id, 'data': data }, context)
+        response = render_to_response('asg/game.html', {'sid':session_id, 'data': data,'gameId':gameId}, context)
         response.set_cookie('gid',session_id)
         return response
 
@@ -82,18 +87,20 @@ def query(request):
             gid = request.COOKIES['gid']
         game = retrieve_game(gid)
         if game:
-            log_move_event(request.user.id, game)
+            log_move_event(request.user.id, game,False)
             game.issue_query()
             store_game(gid, game)
             data = game.get_game_state()
+
 
         new_high = False
         if game.is_game_over():
             # check if this is a high score
             # update userprofile stats
+            log_move_event(request.user.id, game,True)
             new_high = end_game(request.user, game)
 
-        return render_to_response('asg/game.html', {'sid':gid, 'data': data, 'new_high':new_high}, context)
+        return render_to_response('asg/game.html', {'sid':gid, 'data': data, 'new_high':new_high,'gameId':gameId}, context)
 
 def assess(request):
         context = RequestContext(request, {})
@@ -113,9 +120,10 @@ def assess(request):
         if game.is_game_over():
             # check if this is a high score
             # update userprofile stats
+            log_move_event(request.user.id, game,True)
             new_high = end_game(request.user, game)
 
-        return render_to_response('asg/game.html', {'sid':gid, 'data': data, 'new_high':new_high}, context)
+        return render_to_response('asg/game.html', {'sid':gid, 'data': data, 'new_high':new_high,'gameId':gameId}, context)
 
 def profile_page(request, username):
     context = RequestContext(request, {})

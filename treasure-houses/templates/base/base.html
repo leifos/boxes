@@ -1,90 +1,150 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="{{ STATIC_URL }}css/bootstrap-fluid-adj.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/myCss.css" rel="stylesheet">
 
-        <title>
-    {% block title %}
-    {% endblock %}
-           </title>
-  </head>
-  <body>
+    <!-- Animate-->
+    <link href="{{ STATIC_URL }}css/animate.min.css" rel="stylesheet">
 
-  <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
+    <!-- Fonts Awesome-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <!-- Google Font-->
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
         <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/asg/">Treasure Houses</a>
-          <div class="nav-collapse collapse">
-              <p class="navbar-text pull-right">
-            {% if user.is_authenticated %}
-    Welcome <a href="/asg/players/{{user.username}}/">{{user.username}}</a>
-     | <a href="/accounts/logout/">Logout</a>
-{% else %}
-       <a href="/accounts/register/">Register</a>| <a href="/accounts/login/">Login</a>
- {% endif %}
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="/asg/">Treasure Houses</a>
+            <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">
+                    {% if user.is_authenticated %}
+                        Welcome <a href="/asg/players/{{ user.username }}/">{{ user.username }}</a>
+                        | <a href="/accounts/logout/">Logout</a>
+                    {% else %}
+                        <a href="/accounts/register/">Register</a>| <a href="/accounts/login/">Login</a>
+                    {% endif %}
                 </p>
-            <ul class="nav">
-                {% if user.is_authenticated %}
-                <li><a href="/asg/pick/{{user.username}}/">Play</a></li>
-                {% endif %}
-                <li><a href="/asg/leaderboard">Leaderboard</a></li>
-                <li><a href="#contact">About</a></li>
-                <li><a href="/asg/">How To Play</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+                <ul class="nav">
+                    {% if user.is_authenticated %}
+                        <li><a href="/asg/pick/{{ user.username }}/">Play</a></li>
+                    {% endif %}
+                    <li><a href="/asg/leaderboard">Leaderboard</a></li>
+                    <li><a href="#contact">About</a></li>
+                    <li><a href="/asg/">How To Play</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
         </div>
-      </div>
     </div>
+</div>
 
 
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <div class="well sidebar-nav">
-            <ul class="nav nav-list">
-            <li></li><li></li>
-            {% block navbar %}
-            {% endblock %}
-            </ul>
-
-
-
-
-          </div><!--/.well -->
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            {#          <div class="well sidebar-nav">#}
+            {#            <ul class="nav nav-list">#}
+            {#            <li></li><li></li>#}
+            {#            {% block navbar %}#}
+            {#            {% endblock %}#}
+            {#            </ul>#}
+            {##}
+            {##}
+            {##}
+            {##}
+            {#          </div><!--/.well -->#}
 
             {% block belownavbar %}
-                {% endblock %}
+            {% endblock %}
 
         </div><!--/span-->
         <div class="span9">
 
-                    {% block content %}
-     {% endblock %}
+            {% block content %}
+            {% endblock %}
 
 
         </div><!--/span-->
-      </div><!--/row-->
+    </div><!--/row-->
 
-      <hr>
+    <hr>
 
-      <footer>
-        <p>iFind GitHub 2013</p>
-      </footer>
+    {#      <footer>#}
+    {#        <p>iFind GitHub 2013</p>#}
+    {#      </footer>#}
 
-    </div><!--/.fluid-container-->
+</div><!--/.fluid-container-->
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script>
 
-  </body>
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover()
+
+    });
+
+    $(document).ready(function () {
+
+        $.fn.extend({
+            animateCss: function (animationName) {
+                var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                $(this).addClass('animated ' + animationName).one(animationEnd, function () {
+                    $(this).removeClass('animated ' + animationName);
+                });
+            }
+        });
+
+
+        $(".house").mouseover(function () {
+            $(this).animateCss('pulse');
+        });
+
+        $(".house_lock").mouseover(function () {
+            $(this).animateCss('shake');
+        });
+        $(".chests").animateCss('tada');
+        $(".chests_info").animateCss('rubberBand');
+
+
+    });
+
+
+    $(".houseinfo").mouseover(function () {
+        $(this).popover('show');
+    });
+    $(".houseinfo").mouseleave(function () {
+        $(this).popover('hide');
+    })
+
+    {% if data.gameover %}
+        $(document).ready(function () {
+            $('.modal').modal('show');
+        });
+
+    {% endif %}
+
+</script>
+
+</body>
 </html>
