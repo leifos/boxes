@@ -49,7 +49,7 @@
                     {% endif %}
                     <li><a href="/asg/leaderboard">Leaderboard</a></li>
                     <li><a href="#contact">About</a></li>
-                    <li><a href="/asg/">How To Play</a></li>
+                    <li><a href="/asg/howToPlay" target="_blank">How To Play</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -85,13 +85,14 @@
         </div><!--/span-->
     </div><!--/row-->
 
-    <hr>
+    {#    <hr>#}
 
     {#      <footer>#}
     {#        <p>iFind GitHub 2013</p>#}
     {#      </footer>#}
 
 </div><!--/.fluid-container-->
+
 <script src="http://code.jquery.com/jquery.js"></script>
 <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
@@ -139,10 +140,38 @@
 
     {% if data.gameover %}
         $(document).ready(function () {
-            $('.modal').modal('show');
+            setTimeout(function () {
+                $('#gameover').modal('show');
+            }, 1000);
         });
 
     {% endif %}
+
+    {% if query_msg == False %}
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#query_error').modal('show');
+            }, 0);
+        });
+
+    {% endif %}
+
+
+    {% if access_msg == False %}
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#access_error').modal('show');
+            }, 0);
+        });
+
+    {% endif %}
+
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#backHome').click()
+        }, 3000);
+    });
+
 
 </script>
 

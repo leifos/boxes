@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    How to play
+{% endblock %}
+
+{% block navbar %}
+    {% include "base/navbar.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <div align="" style="font-family: 'VT323';font-size: 25px;">
+        <h1 style="font-family: 'VT323';font-size: 50px;">Instruction</h1><br/><br/>
+        <p>
+        <ul>
+            <li>There are many rooms inside a treasure house, each room contains 10 treasure chests.</li><br/><br/>
+
+            <li>Your goal is to find as many gems inside treasure chests as you can.</li><br/><br/>
+
+            <li>Going to next room will bring back new treasure chests.</li><br/><br/>
+
+            <li>Opening chest will bring you gems.</li><br/><br/>
+
+            <li>Both of above actions will cost keys.</li><br/><br/>
+
+            <li>However, you only have a fixed number of keys in each game.</li><br/><br/>
+
+        </ul>
+
+        </p>
+    </div>
+
+
+{% endblock %}

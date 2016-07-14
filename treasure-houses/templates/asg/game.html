@@ -97,7 +97,7 @@
             <hr>
             <h1 style="font-family: 'VT323';">Actions</h1>
             {% if data.gameover %}
-                                <a class="btn btn-success btn-large span6 disabled">
+                <a class="btn btn-success btn-large span5 disabled">
                     <i class="fa fa-unlock-alt" aria-hidden="true"></i>
                     <span style="font-family: 'VT323';font-size: 25px">&nbsp Open chest &nbsp</span>
                         <span class="badge badge-important">
@@ -145,12 +145,14 @@
             <hr>
             <h1 style="font-family: 'VT323';">Game Stats</h1>
             <div class="well">
-                <span class="span4"><span style="font-family: 'VT323';font-size: 20px">Keys Left: </span><span class="badge badge-important">{{ data.tokens }} <i
+                <span class="span4"><span style="font-family: 'VT323';font-size: 20px">Keys Left: </span><span
+                        class="badge badge-important">{{ data.tokens }} <i
                         class="fa fa-key" aria-hidden="true"></i></span></span>
                 {#            <div class="progress span9">#}
                 {#                <div class="bar" style="width: {{ data.ptokens }}%;"></div>#}
                 {#            </div>#}
-                <p class="span4"><span style="font-family: 'VT323';font-size: 20px">Gems Gain: </span><span class="badge badge-success">{{ data.points }} <i
+                <p class="span4"><span style="font-family: 'VT323';font-size: 20px">Gems Gain: </span><span
+                        class="badge badge-success">{{ data.points }} <i
                         class="fa fa-diamond" aria-hidden="true"></i></span></p>
 
                 <p class="span4">
@@ -163,8 +165,8 @@
                 </p>
                 {#            <p>No. of Queries Issued: {{ data.no }}</p>#}
 
-{#                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal">Test#}
-{#                </button>#}
+                {#                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".modal">Test#}
+                {#                </button>#}
 
             </div>
         </div>
@@ -172,7 +174,7 @@
 
     {% endif %}
 
-    <div class="modal fade" tabindex="-1" role="dialog">
+    <div id="gameover" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -181,24 +183,91 @@
                     <h1 style="font-family: 'VT323';" align="center" class="modal-title">GAME OVER</h1>
                 </div>
                 <div class="modal-body" style="font-family: 'VT323';font-size: 25px;">
-                    <p  align="center">You got {{ data.points }} Gems!</p>
+                    {% if gameId == 6 %}
+                        <p align="center"><img src="{% static "images/trophy.png" %}" width="180px"></p>
+                    {% else %}
+                         <p align="center"><img src="{% static "images/star_" %}{{ star }}.png" width="100px"></p>
+                    {% endif %}
+
+                    <p align="center">You got {{ data.points }} Gems!</p>
+
                     {% if new_high %}
                         <p align="center">New High Score!</p>
+                    {% endif %}
+                    {% if gameId == 6 %}
+                        <p align="center" style="font-size: 15px">It's the last house of this game! Thanks for playing!</p>
+                            <br/>
+                    {% else %}
+                    <p align="center">
+                        {% for info in starInfo %}
+                            <span style="font-size: 15px">{{ forloop.counter }} star when you got more than {{ info }} gems</span>
+                            <br/>
+                        {% endfor %}
+                    </p>
                     {% endif %}
                 </div>
                 <div class="modal-footer">
                     <div align="center">
-                    <a href="/asg/" class="btn btn-success btn-large"><i class="fa fa-home" aria-hidden="true"></i>
-                        <span style="font-family: 'VT323';font-size: 20px">Home</span>
-                    </a>
-                    <a href="/asg/pick/{{ user.username }}/" class="btn btn-primary btn-large"><i class="fa fa-repeat" aria-hidden="true"></i>
-                        <span style="font-family: 'VT323';font-size: 20px"> Play Again</span>
-                    </a>
+                        <a href="/asg/" class="btn btn-success btn-large"><i class="fa fa-home" aria-hidden="true"></i>
+                            <span style="font-family: 'VT323';font-size: 20px">Home</span>
+                        </a>
+                        <a href="/asg/pick/{{ user.username }}/" class="btn btn-primary btn-large"><i
+                                class="fa fa-repeat" aria-hidden="true"></i>
+                            <span style="font-family: 'VT323';font-size: 20px"> Play Again</span>
+                        </a>
                     </div>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <div id="query_error" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h1 style="font-family: 'VT323';" align="center" class="modal-title">WARNING</h1>
+                </div>
+                <div class="modal-body" style="font-family: 'VT323';font-size: 25px;">
+                    <p align="center">You don't have enough keys</p>
+                </div>
+                <div class="modal-footer">
+                    <div align="center">
+                        <a type="button" class="btn btn-warning" data-dismiss="modal">
+                            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                            <span style="font-family: 'VT323';font-size: 20px;">Close</span>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div id="access_error" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h1 style="font-family: 'VT323';" align="center" class="modal-title">WARNING</h1>
+                </div>
+                <div class="modal-body" style="font-family: 'VT323';font-size: 25px;">
+                    <p align="center">No more chests to open in this room!</p>
+                </div>
+                <div class="modal-footer">
+                    <div align="center">
+                        <a type="button" class="btn btn-warning" data-dismiss="modal">
+                            <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                            <span style="font-family: 'VT323';font-size: 20px;">Close</span>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 
 
 {% endblock %}

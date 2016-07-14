@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load staticfiles %}
 
 {% block title %}<title>Sign up</title>{% endblock %}
 
@@ -9,10 +10,12 @@
 
 
 {% block content %}
+    <img src="{% static "images/logo.png" %}"><br/><br/>
+    <p align="center" style="font-family: 'VT323';font-size: 50px;">Create an account</p>
+    <div class=" span8 offset2">
 
-<div class="hero-unit">
-    <h1>Create an account</h1>
-<br/>
+<div class="">
+    <br/>
   {% if form.errors %}
     <div class="alert">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -25,7 +28,7 @@
         {% csrf_token %}
 
             <div class="control-group">
-                <label class="control-label" for="id_username" >Username</label>
+                <label class="control-label" for="id_username" style="font-family: 'VT323';font-size: 25px;" >Username</label>
                 <div class="controls">
                     <small>{{form.username.errors}}</small>
                     <input type="text" id="id_username" name="username" placeholder="">
@@ -34,7 +37,7 @@
            </div>
 
             <div class="control-group">
-                <label class="control-label" for="id_email" >Email</label>
+                <label class="control-label" for="id_email" style="font-family: 'VT323';font-size: 25px;">Email</label>
                 <div class="controls">
                    <small>{{form.email.errors}}</small>
 
@@ -44,7 +47,7 @@
            </div>
 
             <div class="control-group">
-                <label class="control-label" for="id_password1" >Password</label>
+                <label class="control-label" for="id_password1" style="font-family: 'VT323';font-size: 25px;">Password</label>
                 <div class="controls">
                     <small>{{form.password1.errors}}</small>
                     <input type="password" id="id_password1" name="password1" placeholder="Password">
@@ -53,7 +56,7 @@
            </div>
 
                         <div class="control-group">
-                <label class="control-label" for="id_password2" >Re-enter Password</label>
+                <label class="control-label" for="id_password2" style="font-family: 'VT323';font-size: 25px;">Re-enter PWD</label>
                 <div class="controls">
                     <small>{{form.password2.errors}}</small>
                     <input type="password" id="id_password2" name="password2" placeholder="Password">
@@ -62,7 +65,7 @@
            </div>
 <div class="control-group">
     <div class="controls">
-    <button type="submit" class="btn btn-primary btn-large" value="Register &rarr;">Register &rarr;</button>
+    <button type="submit" class="btn btn-primary btn-large" value="Register &rarr;">Register <i class="fa fa-user" aria-hidden="true"></i></button>
    </div> </div>
       </form>
 {% endblock %}

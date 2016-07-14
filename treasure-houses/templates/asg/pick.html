@@ -18,7 +18,7 @@
     </div>
     </span>
 
-    {% for g,l,us,gs in zipped_data %}
+    {% for g,l,us,gs,st in zipped_data %}
 
         {% if forloop.first %}
             <div class="row-fluid">
@@ -27,22 +27,51 @@
 {#        <h3>{{ g.name }}</h3>#}
 
         {% if g.id == 1 %}
+            <img src="{% static "images/star_" %}{{ st }}.png" width="180px">
             <a href="/asg/start/{{ g.id }}/">
-                <span class="houseinfo" data-toggle="popover" data-placement="left" title="{{ g.name }}" data-content="Gems you got: {{ gs }}">
-                    <img class="house" src="{% static "images/house_" %}{{ forloop.counter0 }}.png" width="180px">
-                </span>
+                    <img class="houseinfo house" data-toggle="popover"
+                         data-placement="bottom"
+                         title="{{ g.name }}"
+                         data-content="Gems you got: {{ gs }}"
+                         src="{% static "images/house_" %}{{ forloop.counter0 }}.png"
+                         width="180px"
+                    >
             </a>
+        {% elif g.id == 6 %}
+            {% if l == 1 %}
+                <img src="{% static "images/star_0.png" %}" width="180px">
+                <img data-toggle="tooltip" data-placement="bottom" title="Get 3 Stars in previous house to unlock!"
+                     class="house_lock" src="{% static "images/house_" %}{{ forloop.counter0 }}_lock.png" width="180px">
+            {% else %}
+                <img src="{% static "images/trophy.png" %}" width="180px">
+                <a href="/asg/start/{{ g.id }}/">
+                    <img class="houseinfo house" data-toggle="popover"
+                         data-placement="bottom"
+                         title="{{ g.name }}"
+                         data-content="Gems you got: {{ gs }}"
+                         src="{% static "images/house_" %}{{ forloop.counter0 }}.png"
+                         width="180px"
+                    >
+            </a>
+            {% endif %}
 
         {% else %}
             {% if l == 1 %}
-                <img data-toggle="tooltip" data-placement="right" title="Get {{ us }} Gems in previous house to unlock!"
+                <img src="{% static "images/star_0.png" %}" width="180px">
+                <img data-toggle="tooltip" data-placement="bottom" title="Get 3 Stars in previous house to unlock!"
                      class="house_lock" src="{% static "images/house_" %}{{ forloop.counter0 }}_lock.png" width="180px">
 
             {% else %}
+                <img src="{% static "images/star_" %}{{ st }}.png" width="180px">
                 <a href="/asg/start/{{ g.id }}/">
-                <span class="houseinfo" data-toggle="popover" data-placement="left" title="{{ g.name }}" data-content="Gems you got: {{ gs }}">
-                    <img class="house" src="{% static "images/house_" %}{{ forloop.counter0 }}.png" width="180px">
-                </span>
+                    <img class="houseinfo house"
+                         data-toggle="popover"
+                         data-placement="bottom"
+                         title="{{ g.name }}"
+                         data-content="Gems you got: {{ gs }}"
+                         src="{% static "images/house_" %}{{ forloop.counter0 }}.png"
+                         width="180px"
+                    >
                 </a>
             {% endif %}
         {% endif %}

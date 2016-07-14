@@ -1,46 +1,57 @@
-
 {% extends 'base/base.html' %}
 {% load staticfiles %}
 
 {% block title %}
-      Treasure Houses
+    Treasure Houses
 {% endblock %}
 
 {% block navbar %}
-            {% include "base/navbar.html" %}
+    {% include "base/navbar.html" %}
 {% endblock %}
 
 
 {% block content %}
-    <div class="hero-unit">
-    <h1>Treasure Houses<img src="{% static "images/planet.png" %}" width="200"></h1>
-    <p class="lead">
-        Put your search skills to find treasures as many as possible!</p>
-<p>
-    <ul>
-        <li>There are many rooms inside a treasure house, each room contains 10 treasure chests</li>
+    <div align="center">
 
-        <li>Your goal is to find as many gems inside treasure chests as you can.</li>
+        <img src="{% static "images/logo.png" %}">
+        <p style="font-family: 'VT323';font-size: 25px;" align="center" class="lead">
+            Put your search skills to find treasures as many as possible!</p>
 
-        <li>Going to next room will bring back new treasure chests.</li>
 
-        <li>Opening chest will bring you gems</li>
+        {#<p>#}
+        {#    <ul>#}
+        {#        <li>There are many rooms inside a treasure house, each room contains 10 treasure chests</li>#}
+        {##}
+        {#        <li>Your goal is to find as many gems inside treasure chests as you can.</li>#}
+        {##}
+        {#        <li>Going to next room will bring back new treasure chests.</li>#}
+        {##}
+        {#        <li>Opening chest will bring you gems</li>#}
+        {##}
+        {#        <li>Both of above actions will cost keys</li>#}
+        {##}
+        {#        <li>However, you only have a fixed number of keys in each game.</li>#}
+        {##}
+        {#    </ul>#}
+        {##}
+        {#    </p>#}
 
-        <li>Both of above actions will cost keys</li>
+        {% if user.is_authenticated %}
 
-        <li>However, you only have a fixed number of keys in each game.</li>
-
-    </ul>
-
-    </p>
-
-    {% if user.is_authenticated %}
-    <p><a href="/asg/pick/{{ user.username }}" class="btn btn-success btn-large">Play &raquo;</a></p>
-       {% else %}
-    <p><a href="/accounts/register/" class="btn btn-success btn-large">Signup &raquo;</a>  <a href="/accounts/login/" class="btn btn-primary btn-large">Login &raquo;</a></p>
+            <p><a href="/asg/pick/{{ user.username }}" class="btn btn-success btn-large span3 offset4">
+                Play
+                <i class="fa fa-gamepad" aria-hidden="true"></i>
+            </a>
+            </p>
+        {% else %}
+            <p><a href="/accounts/register/" class="btn btn-success btn-large span4 offset2">Signup <i
+                    class="fa fa-user" aria-hidden="true"></i></a> <a
+                    href="/accounts/login/" class="btn btn-primary btn-large span4">Login <i class="fa fa-sign-in"
+                                                                                             aria-hidden="true"></i></a>
+            </p>
         {% endif %}
 
-  </div>
+    </div>
 
 
 {% endblock %}
