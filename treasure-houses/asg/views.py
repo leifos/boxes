@@ -25,6 +25,11 @@ def howToPlay(request):
     return render_to_response('asg/howToPlay.html', context)
 
 
+def about(request):
+    context = RequestContext(request, {})
+    return render_to_response('asg/about.html', context)
+
+
 
 def pick(request, username):
     ge = GameExperiment.objects.all()
@@ -33,7 +38,7 @@ def pick(request, username):
 
     lock = [0, 1, 1, 1, 1, 1]
     global unlockScore
-    unlockScore = [0, 35, 45, 40, 45, 45]
+    unlockScore = [0, 35, 50, 40, 42, 55]
 
     maxHighScore = [0, 0, 0, 0, 0, 0]
 

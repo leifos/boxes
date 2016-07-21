@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    How to play
+{% endblock %}
+
+{% block navbar %}
+    {% include "base/navbar.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="span11"  style="font-family: 'VT323';font-size: 25px;">
+        <h1 align="center" style="font-family: 'VT323';font-size: 50px;">About</h1><br/><br/>
+
+        <p style="line-height: 100%">
+            The game is a part of Master project of University of Glasgow. It is designed and implemented based on a existing game called Abstract Search Game.
+            The project is trying to explore that how does the quality of information affect search behaviour. Below is the information about
+            the game developer and supervisor.
+        </p>
+        <br/><br/>
+        <p style="line-height: 100%">
+            Developer: Wenyi Chen<br/>
+            Supervisor: Dr. Leif Azzopardi<br/>
+            Second Supervisor: David Martin Maxwell<br/>
+        </p>
+        <br/>
+        <p style="line-height: 100%">
+            School of Computer Science<br/>
+            <img src="{% static "images/uni_logo.png" %}" width="20px" />
+            University of Glasgow
+        </p>
+
+    </div>
+
+
+{% endblock %}

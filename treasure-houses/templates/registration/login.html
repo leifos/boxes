@@ -9,50 +9,52 @@
 
 
 {% block content %}
+    <div class="span11">
     <img src="{% static "images/logo.png" %}"><br/><br/>
-    <p align="center" style="font-family: 'VT323';font-size: 50px;">Login</p>
+
     <div class=" span8 offset2">
-
-    <br/>
-    {% if form.errors %}
-        <div class="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Warning!</strong> Please correct the errors below: {{ form.non_field_errors }}
-        </div>
-    {% endif %}
-
-
-    <form method="post" action="?next={{ next|default:'/asg/' }}" class="form-horizontal">
-        {% csrf_token %}
-
-        <div class="control-group">
-            <label class="control-label" for="id_username"
-                   style="font-family: 'VT323';font-size: 25px;">Username</label>
-            <div class="controls">
-                <small>{{ form.username.errors }}</small>
-                <input type="text" id="id_username" name="username" placeholder="">
+        <p align="center" style="font-family: 'VT323';font-size: 50px;">Login</p>
+        <br/>
+        {% if form.errors %}
+            <div class="alert">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Warning!</strong> Please correct the errors below: {{ form.non_field_errors }}
             </div>
-        </div>
+        {% endif %}
 
-        <div class="control-group">
-            <label class="control-label" for="id_password"
-                   style="font-family: 'VT323';font-size: 25px;">Password</label>
-            <div class="controls">
-                <small>{{ form.password.errors }}</small>
-                <input type="password" id="id_password" name="password" placeholder="Password">
+
+        <form method="post" action="?next={{ next|default:'/asg/' }}" class="form-horizontal">
+            {% csrf_token %}
+
+            <div class="control-group">
+                <label class="control-label" for="id_username"
+                       style="font-family: 'VT323';font-size: 25px;">Username</label>
+                <div class="controls">
+                    <small>{{ form.username.errors }}</small>
+                    <input type="text" id="id_username" name="username" placeholder="">
+                </div>
             </div>
-        </div>
 
-
-        <div class="control-group">
-            <div class="controls">
-                <button type="submit" class="btn btn-primary btn-large span6" value="Login &rarr;">
-                    Login
-                    <i class="fa fa-sign-in"
-                       aria-hidden="true"></i>
-                </button>
+            <div class="control-group">
+                <label class="control-label" for="id_password"
+                       style="font-family: 'VT323';font-size: 25px;">Password</label>
+                <div class="controls">
+                    <small>{{ form.password.errors }}</small>
+                    <input type="password" id="id_password" name="password" placeholder="Password">
+                </div>
             </div>
-        </div>
+
+
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary btn-large span6" value="Login &rarr;">
+                        Login
+                        <i class="fa fa-sign-in"
+                           aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+    </div>
     </form>
 
 {% endblock %}

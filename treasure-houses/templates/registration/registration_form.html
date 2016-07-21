@@ -1,84 +1,91 @@
 {% extends "base/base.html" %}
 {% load staticfiles %}
 
-{% block title %}<title>Sign up</title>{% endblock %}
+{% block title %}Sign up{% endblock %}
 
-        {% block navbar %}
+{% block navbar %}
 
-            {% include "base/navbar.html" %}
+    {% include "base/navbar.html" %}
 {% endblock %}
 
 
 {% block content %}
+    <div class="span11">
     <img src="{% static "images/logo.png" %}"><br/><br/>
     <p align="center" style="font-family: 'VT323';font-size: 50px;">Create an account</p>
     <div class=" span8 offset2">
 
-<div class="">
+    <div class="">
     <br/>
-  {% if form.errors %}
-    <div class="alert">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-  <strong>Warning!</strong> Please correct the errors below: {{ form.non_field_errors }}
+    {% if form.errors %}
+        <div class="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Warning!</strong> Please correct the errors below: {{ form.non_field_errors }}
 
-    </div>
-  {% endif %}
+        </div>
+    {% endif %}
 
-        <form method="post" action="" class="form-horizontal form-signin">
+    <form method="post" action="" class="form-horizontal form-signin">
         {% csrf_token %}
 
-            <div class="control-group">
-                <label class="control-label" for="id_username" style="font-family: 'VT323';font-size: 25px;" >Username</label>
-                <div class="controls">
-                    <small>{{form.username.errors}}</small>
-                    <input type="text" id="id_username" name="username" placeholder="">
+        <div class="control-group">
+            <label class="control-label" for="id_username"
+                   style="font-family: 'VT323';font-size: 25px;">Username</label>
+            <div class="controls">
+                <small>{{ form.username.errors }}</small>
+                <input type="text" id="id_username" name="username" placeholder="">
 
-                </div>
-           </div>
+            </div>
+        </div>
 
-            <div class="control-group">
-                <label class="control-label" for="id_email" style="font-family: 'VT323';font-size: 25px;">Email</label>
-                <div class="controls">
-                   <small>{{form.email.errors}}</small>
+        <div class="control-group">
+            <label class="control-label" for="id_email" style="font-family: 'VT323';font-size: 25px;">Email</label>
+            <div class="controls">
+                <small>{{ form.email.errors }}</small>
 
-                    <input type="text" id="id_email" name="email" placeholder="Email">
+                <input type="text" id="id_email" name="email" placeholder="Email">
 
-                </div>
-           </div>
+            </div>
+        </div>
 
-            <div class="control-group">
-                <label class="control-label" for="id_password1" style="font-family: 'VT323';font-size: 25px;">Password</label>
-                <div class="controls">
-                    <small>{{form.password1.errors}}</small>
-                    <input type="password" id="id_password1" name="password1" placeholder="Password">
+        <div class="control-group">
+            <label class="control-label" for="id_password1"
+                   style="font-family: 'VT323';font-size: 25px;">Password</label>
+            <div class="controls">
+                <small>{{ form.password1.errors }}</small>
+                <input type="password" id="id_password1" name="password1" placeholder="Password">
 
-                </div>
-           </div>
+            </div>
+        </div>
 
-                        <div class="control-group">
-                <label class="control-label" for="id_password2" style="font-family: 'VT323';font-size: 25px;">Re-enter PWD</label>
-                <div class="controls">
-                    <small>{{form.password2.errors}}</small>
-                    <input type="password" id="id_password2" name="password2" placeholder="Password">
+        <div class="control-group">
+            <label class="control-label" for="id_password2" style="font-family: 'VT323';font-size: 25px;">Re-enter
+                PWD</label>
+            <div class="controls">
+                <small>{{ form.password2.errors }}</small>
+                <input type="password" id="id_password2" name="password2" placeholder="Password">
 
-                </div>
-           </div>
-<div class="control-group">
-    <div class="controls">
-    <button type="submit" class="btn btn-primary btn-large" value="Register &rarr;">Register <i class="fa fa-user" aria-hidden="true"></i></button>
-   </div> </div>
-      </form>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary btn-large" value="Register &rarr;">Register <i
+                        class="fa fa-user" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </form>
 {% endblock %}
 
 
 {% block content-related %}
-<p>Fill out the form to the left (all fields are required), and your
-account will be created; you'll be sent an email with instructions on how
-to finish your registration.</p>
+    <p>Fill out the form to the left (all fields are required), and your
+        account will be created; you'll be sent an email with instructions on how
+        to finish your registration.</p>
 
-<p>We'll only use your email to send you signup instructions. We hate spam
-as much as you do.</p>
+    <p>We'll only use your email to send you signup instructions. We hate spam
+        as much as you do.</p>
 
+    </div>
     </div>
 
 {% endblock %}

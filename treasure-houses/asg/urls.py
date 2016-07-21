@@ -6,6 +6,7 @@ import views
 urlpatterns = patterns('',
                        url(r'^$', views.index, name='index'),
                        url(r'^howToPlay/$', views.howToPlay, name='howToPlay'),
+                       url(r'^about/$', views.about, name='about'),
                        url(r'^start/(?P<num>[0-9]+)/$', views.startgame, name='startgame'),
                        url(r'^pick/(?P<username>[a-zA-Z0-9_.+@-]+)', views.pick, name='pick'),
                        url(r'^query/$', views.query, name='query'),

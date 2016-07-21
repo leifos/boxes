@@ -11,25 +11,106 @@
 
 
 {% block content %}
-    <div align="" style="font-family: 'VT323';font-size: 25px;">
+    <div class="span10" align="center" style="font-family: 'VT323';font-size: 25px;">
         <h1 style="font-family: 'VT323';font-size: 50px;">Instruction</h1><br/><br/>
-        <p>
-        <ul>
-            <li>There are many rooms inside a treasure house, each room contains 10 treasure chests.</li><br/><br/>
 
-            <li>Your goal is to find as many gems inside treasure chests as you can.</li><br/><br/>
 
-            <li>Going to next room will bring back new treasure chests.</li><br/><br/>
+        <div>
 
-            <li>Opening chest will bring you gems.</li><br/><br/>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#s1" aria-controls="s1" role="tab"
+                                                          data-toggle="tab">Step 1</a></li>
+                <li role="presentation"><a href="#s2" aria-controls="s2" role="tab"
+                                           data-toggle="tab">Step 2</a></li>
+                <li role="presentation"><a href="#s3" aria-controls="s3" role="tab" data-toggle="tab">Step 3</a>
+                </li>
+                <li role="presentation"><a href="#s4" aria-controls="s4" role="tab" data-toggle="tab">Step 4</a>
+                </li>
+                <li role="presentation"><a href="#s5" aria-controls="s5" role="tab" data-toggle="tab">Step 5</a>
+                </li>
+                <li role="presentation"><a href="#s6" aria-controls="s6" role="tab" data-toggle="tab">Step 6</a>
+                </li>
+                <li role="presentation"><a href="#s7" aria-controls="s7" role="tab" data-toggle="tab">Step 7</a>
+                </li>
+                <li role="presentation"><a href="#s8" aria-controls="s8" role="tab" data-toggle="tab">Step 8</a>
+                </li>
+            </ul>
 
-            <li>Both of above actions will cost keys.</li><br/><br/>
+            <!-- Tab panes -->
+            <div class="tab-content"  align="center">
+                <div role="tabpanel" class="tab-pane active" id="s1">
+                    <br/>
+                    Pick a Treasure House first to discover the treasure chests inside!<br/><br/>
+                    <img src="{% static "images/pick.png" %}" width="500px">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="s2">
+                    <br/>
+                    There are 10 chests in a room of Treasure House.<br/><br/>
+                    <img src="{% static "images/treasures.png" %}" width="800px">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="s3">
+                    <br/>
+                    Now you can take actions: Open a chest or move to next room?<br/><br/>
+                    Open a chest will cost 1 key and Go to next room will cost 2 keys.<br/><br/>
+                    <img src="{% static "images/actions.png" %}" width="800px">
 
-            <li>However, you only have a fixed number of keys in each game.</li><br/><br/>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="s4">
+                    <br/>
+                    Chests only can be opnened from left to the right and one by one.<br/><br/>
+                    <img src="{% static "images/inPlay.png" %}" width="800px">
+                </div>
 
-        </ul>
+                <div role="tabpanel" class="tab-pane" id="s5">
+                    <br/>
+                    The game stats bar will display the useful information to you.<br/><br/>
+                    <img src="{% static "images/status.png" %}" width="800px">
+                </div>
 
-        </p>
+                <div role="tabpanel" class="tab-pane" id="s6">
+                    <br/>
+                    Once you used up all the keys, a result will pop over.<br/><br/>
+                    <img src="{% static "images/results.png" %}" width="500px">
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="s7">
+                    <br/>
+                    Get a 3 star will unlock next Treasure House!<br/><br/>
+                    <img src="{% static "images/unlock.png" %}" width="500px">
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="s8">
+                    <br/>
+                    Now, trying to find gems as many as you can!<br/><br/>
+                    <img src="{% static "images/find.png" %}" width="200px">
+                </div>
+            </div>
+
+        </div>
+
+        {#        <ul>#}
+        {#            <li>There are many rooms inside a treasure house, each room contains 10 treasure chests.</li>#}
+        {#            <br/><br/>#}
+        {##}
+        {#            <li>Your goal is to find as many gems inside treasure chests as you can.</li>#}
+        {#            <br/><br/>#}
+        {##}
+        {#            <li>Going to next room will bring back new treasure chests.</li>#}
+        {#            <br/><br/>#}
+        {##}
+        {#            <li>Opening chest will bring you gems.</li>#}
+        {#            <br/><br/>#}
+        {##}
+        {#            <li>Both of above actions will cost keys.</li>#}
+        {#            <br/><br/>#}
+        {##}
+        {#            <li>However, you only have a fixed number of keys in each game.</li>#}
+        {#            <br/><br/>#}
+        {##}
+        {#        </ul>#}
+
+
     </div>
 
 
