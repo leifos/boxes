@@ -14,25 +14,7 @@
 {% endblock %}
 
 {% block belownavbar %}
-    {#        <div class="well sidebar-nav">#}
-    {##}
-    {#        <ul class="nav nav-list">#}
-    {#             <li class="nav-header">Instructions</li>#}
-    {##}
-    {#            <li>Click <b>Open chest</b> to open the next chest.</li>#}
-    {#            <br/>#}
-    {#            <li>Each chest contains 0 to 3 gems.</li>#}
-    {#            <br/>#}
-    {#            <li>Click <b>Go to next room</b> to move to a new set of chests.</li>#}
-    {#            <br/>#}
-    {#            <li>Each action cost keys.</li>#}
-    {#            <br/>#}
-    {#            <li>Each games has 30 keys.</li>#}
-    {#            <br/>#}
-    {#            <li>Find the most amount of gems</li>#}
-    {##}
-    {#        </ul>#}
-    {#             </div><!--/.well -->#}
+
 {% endblock %}
 
 
@@ -58,13 +40,13 @@
                             {% if d.opened %}
                                 <img src="{% static "images/chest_noinfo_opened_" %}{{ d.gain }}.png" width="120">
                             {% else %}
-                                <img class="chests" src="{% static "images/chest_noinfo.png" %}" width="120">
+                                <img class="chests {{ forloop.counter0 }}" src="{% static "images/chest_noinfo.png" %}" width="120">
                             {% endif %}
                         {% else %}
                             {% if d.opened %}
                                 <img src="{% static "images/chest_" %}{{ d.gain }}_opened.png" width="120">
                             {% else %}
-                                <img class="chests_info" src="{% static "images/chest_" %}{{ d.gain }}.png" width="120">
+                                <img class="chests_info {{ forloop.counter0 }}_info" src="{% static "images/chest_" %}{{ d.gain }}.png" width="120">
                             {% endif %}
                         {% endif %}
                         {% if d.opened %}
@@ -174,7 +156,7 @@
 
     {% endif %}
 
-    <div id="gameover" class="modal fade" tabindex="-1" role="dialog">
+    <div id="gameover" class="modal fade hide" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -221,7 +203,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div id="query_error" class="modal fade" tabindex="-1" role="dialog">
+    <div id="query_error" class="modal fade hide" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -245,7 +227,7 @@
     </div><!-- /.modal -->
 
 
-    <div id="access_error" class="modal fade" tabindex="-1" role="dialog">
+    <div id="access_error" class="modal fade hide" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

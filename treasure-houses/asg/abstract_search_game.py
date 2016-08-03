@@ -52,6 +52,7 @@ class ABSGame(object):
             # update points with any gain recieved.
             self.points = self.points +  gain
 
+
             return True
         else:
             return False
@@ -129,6 +130,15 @@ class ABSGame(object):
         data['gameover'] = self.is_game_over()
         data['ptokens'] = (self.tokens*100) / (self.tokens + self.tokens_spent)
         return data
+
+    def get_score(self):
+        return self.points
+
+    def get_open_cost(self):
+        return self.ca
+
+    def get_move_cost(self):
+        return self.cq
 
     def __getitem__(self, item):
         return self.round_no

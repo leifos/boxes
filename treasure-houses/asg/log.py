@@ -34,13 +34,13 @@ def log_move_event(uid,game,is_start,is_over):
 
     if is_start == True:
         action_msg = 'GAME_START'
-        msg = '{0} {1} {2}'.format(uid,game.id,action_msg)
+        msg = '{0} {1} {2} {3} {4}'.format(uid,game.id,action_msg,game.get_open_cost(),game.get_move_cost())
         event_logger.info(msg=msg)
     elif is_over == True:
         msg = '{0} {1} {2} {3} {4} {5}'.format(uid,game.id,action_msg,round_no,pos,gain_str)
         event_logger.info(msg=msg)
         action_msg = 'GAME_OVER'
-        msg = '{0} {1} {2}'.format(uid,game.id,action_msg)
+        msg = '{0} {1} {2} {3}'.format(uid,game.id,action_msg,game.get_score())
         event_logger.info(msg=msg)
     else:
         msg = '{0} {1} {2} {3} {4} {5}'.format(uid,game.id,action_msg,round_no,pos,gain_str)

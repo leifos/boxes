@@ -32,7 +32,7 @@
                 {% for p in players %}
                     <tr class="success">
                     <td><a href='/asg/players/{{ p.user.username }}/'> {{ p.user.username }}</a></td>
-                    <td>{{ p.average_points }}</td>
+                    <td>{{ p.average_points|floatformat:"1" }}</td>
                     <td>{{ p.total_points }}</td>
                     <td> {{ p.ratio }}</td>
                 {% endfor %}

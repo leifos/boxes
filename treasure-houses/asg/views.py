@@ -77,8 +77,11 @@ def pick(request, username):
 
 def leaderboard(request):
     context = RequestContext(request, {})
-    up = UserProfile.objects.all().extra(select={'total': 'total_points / no_games_played'}).order_by('-total')
-    paginator = Paginator(up, 20)
+    #up = UserProfile.objects.all().extra(select={'get_average_points'}).order_by('-total')
+    up_list = list(UserProfile.objects.all())
+    up_list = sorted(up_list, key=lambda x: 0 if x.no_games_played==0 else x.total_points / float(x.no_games_played), reverse=True)
+
+    paginator = Paginator(up_list, 20)
     page = request.GET.get('page')
     try:
         players = paginator.page(page)
@@ -102,9 +105,11 @@ def startgame(request, num):
     global access_limit
     access_limit = 10
 
+    nextTreasureNo = 10 - access_limit
+
     data = game.get_game_state()
     store_game(session_id, game)
-    response = render_to_response('asg/game.html', {'sid': session_id, 'data': data, 'gameId': gameId}, context)
+    response = render_to_response('asg/game.html', {'sid': session_id, 'data': data, 'gameId': gameId,'next':nextTreasureNo}, context)
     response.set_cookie('gid', session_id)
     return response
 
@@ -117,6 +122,8 @@ def query(request):
     data = {}
     global access_limit
     access_limit = 10
+
+    nextTreasureNo = 10 - access_limit
 
     if request.COOKIES.has_key('gid'):
         gid = request.COOKIES['gid']
@@ -144,14 +151,14 @@ def query(request):
 
         if game.id == 6:
             return render_to_response('asg/game.html', {'sid': gid, 'data': data, 'new_high': new_high, 'gameId': gameId,
-                                                'query_msg': query_msg,},
+                                                'query_msg': query_msg,'next':nextTreasureNo},
                               context)
 
         star_info = star_game(game.id)
         star_thisGame = star_calculate(data['points'],unlockScore[game.id])
 
     return render_to_response('asg/game.html', {'sid': gid, 'data': data, 'new_high': new_high, 'gameId': gameId,
-                                                'query_msg': query_msg,'starInfo':star_info,'star':star_thisGame},
+                                                'query_msg': query_msg,'starInfo':star_info,'star':star_thisGame,'next':nextTreasureNo},
                               context)
 
 
@@ -175,6 +182,8 @@ def assess(request):
         else:
             access_msg = False
 
+        nextTreasureNo = 10 - access_limit
+
         store_game(gid, game)
         data = game.get_game_state()
 
@@ -188,7 +197,7 @@ def assess(request):
         if game.id == 6:
             return render_to_response('asg/game.html',
                               {'sid': gid, 'data': data, 'new_high': new_high, 'access_msg': access_msg,
-                               'gameId': gameId},
+                               'gameId': gameId,'next':nextTreasureNo},
                               context)
 
         star_info = star_game(game.id)
@@ -196,7 +205,7 @@ def assess(request):
 
     return render_to_response('asg/game.html',
                               {'sid': gid, 'data': data, 'new_high': new_high, 'access_msg': access_msg,
-                               'gameId': gameId,'starInfo':star_info,'star':star_thisGame},
+                               'gameId': gameId,'starInfo':star_info,'star':star_thisGame,'next':nextTreasureNo},
                               context)
 
 
