@@ -4,9 +4,9 @@
 
  {% if user.is_authenticated %}
          <li class="nav-header">Welcome {{user.username}}</li>
-    <li><a href="/asg/pick/{{user.username}}/">Play</a></li>
+    <li><a href="/th/pick/{{user.username}}/">Play</a></li>
 
- <li><a href="/asg/players/{{user.username}}/">View Profile</a></li>
+ <li><a href="/th/players/{{user.username}}/">View Profile</a></li>
 
     <li><a href="/accounts/logout/">Leave</a></li>
 
@@ -14,8 +14,8 @@
 
 
  <li class="nav-header">Gameplay</li>
-  <li><a href="/asg/howToPlay">How To Play</a></li>
- <li><a href="/asg/leaderboard">Leaderboard</a></li>
+  <li><a href="/th/howToPlay">How To Play</a></li>
+ <li><a href="/th/leaderboard">Leaderboard</a></li>
 
 
 {% if not user.is_authenticated %}

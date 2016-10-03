@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', include('asg.urls')),
     # url(r'^asg_project/', include('asg_project.foo.urls')),
-    url(r'^asg/', include('asg.urls')),
+    url(r'^th/', include('asg.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

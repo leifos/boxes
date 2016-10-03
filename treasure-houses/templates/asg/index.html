@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block title %}
-    Treasure Houses
+    Treasure House
 {% endblock %}
 
 {% block navbar %}
@@ -18,29 +18,15 @@
             Put your search skills to find treasures as many as possible!</p>
 
 
-        {#<p>#}
-        {#    <ul>#}
-        {#        <li>There are many rooms inside a treasure house, each room contains 10 treasure chests</li>#}
-        {##}
-        {#        <li>Your goal is to find as many gems inside treasure chests as you can.</li>#}
-        {##}
-        {#        <li>Going to next room will bring back new treasure chests.</li>#}
-        {##}
-        {#        <li>Opening chest will bring you gems</li>#}
-        {##}
-        {#        <li>Both of above actions will cost keys</li>#}
-        {##}
-        {#        <li>However, you only have a fixed number of keys in each game.</li>#}
-        {##}
-        {#    </ul>#}
-        {##}
-        {#    </p>#}
-
         {% if user.is_authenticated %}
 
-            <p><a href="/asg/pick/{{ user.username }}" class="btn btn-success btn-large span3 offset4">
+            <p><a href="/th/pick/{{ user.username }}" class="btn btn-success btn-large span3 offset3">
                 Play
                 <i class="fa fa-gamepad" aria-hidden="true"></i>
+            </a>
+            <a href="/th/howToPlay" class="btn btn-info btn-large span3">
+                How To Play
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
             </a>
             </p>
         {% else %}

@@ -24,18 +24,18 @@
             <div class="row-fluid">
         {% endif %}
     <div class="span4">
-{#        <h3>{{ g.name }}</h3>#}
+        {#        <h3>{{ g.name }}</h3>#}
 
         {% if g.id == 1 %}
             <img src="{% static "images/star_" %}{{ st }}.png" width="180px">
-            <a href="/asg/start/{{ g.id }}/">
-                    <img class="houseinfo house" data-toggle="popover"
-                         data-placement="bottom"
-                         title="{{ g.name }}"
-                         data-content="Gems you got: {{ gs }}"
-                         src="{% static "images/house_" %}{{ forloop.counter0 }}.png"
-                         width="180px"
-                    >
+            <a href="/th/start/{{ g.id }}/">
+                <img class="houseinfo house" data-toggle="popover"
+                     data-placement="bottom"
+                     title="{{ g.name }}"
+                     data-content="Gems you got: {{ gs }}"
+                     src="{% static "images/house_" %}{{ forloop.counter0 }}.png"
+                     width="180px"
+                >
             </a>
         {% elif g.id == 6 %}
             {% if l == 1 %}
@@ -44,7 +44,7 @@
                      class="house_lock" src="{% static "images/house_" %}{{ forloop.counter0 }}_lock.png" width="180px">
             {% else %}
                 <img src="{% static "images/trophy.png" %}" width="180px">
-                <a href="/asg/start/{{ g.id }}/">
+                <a href="/th/start/{{ g.id }}/">
                     <img class="houseinfo house" data-toggle="popover"
                          data-placement="bottom"
                          title="{{ g.name }}"
@@ -52,7 +52,7 @@
                          src="{% static "images/house_" %}{{ forloop.counter0 }}.png"
                          width="180px"
                     >
-            </a>
+                </a>
             {% endif %}
 
         {% else %}
@@ -63,7 +63,7 @@
 
             {% else %}
                 <img src="{% static "images/star_" %}{{ st }}.png" width="180px">
-                <a href="/asg/start/{{ g.id }}/">
+                <a href="/th/start/{{ g.id }}/">
                     <img class="houseinfo house"
                          data-toggle="popover"
                          data-placement="bottom"
@@ -76,8 +76,8 @@
             {% endif %}
         {% endif %}
         {#             <p>{{g.desc}}</p><p>Average Gain/Time Ratio: {{g.ratio}}</p>#}
-       <br/><br/><br/>
-        {#             <p><a class="btn btn-primary" href="/asg/start/{{g.id}}/">Play &raquo;</a></p>#}
+        <br/><br/><br/>
+        {#             <p><a class="btn btn-primary" href="/th/start/{{g.id}}/">Play &raquo;</a></p>#}
     </div><!--/span-->
     {% if forloop.counter|divisibleby:"3" %}
         </div>
@@ -90,6 +90,7 @@
     {% endif %}
     {% endfor %}
 
+    <audio src="{% static "images/bg.mp3" %}" autoplay/>
 
 
 {% endblock %}

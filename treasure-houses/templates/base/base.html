@@ -33,11 +33,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="brand" href="/asg/">Treasure Houses</a>
+            <a class="brand" href="/th/">Treasure House</a>
             <div class="nav-collapse collapse">
                 <p class="navbar-text pull-right">
                     {% if user.is_authenticated %}
-                        Welcome <a href="/asg/players/{{ user.username }}/">{{ user.username }}</a>
+                        Welcome <a href="/th/players/{{ user.username }}/">{{ user.username }}</a>
                         | <a href="/accounts/logout/">Logout</a>
                     {% else %}
                         <a href="/accounts/register/">Register</a>| <a href="/accounts/login/">Login</a>
@@ -45,11 +45,11 @@
                 </p>
                 <ul class="nav">
                     {% if user.is_authenticated %}
-                        <li><a href="/asg/pick/{{ user.username }}/">Play</a></li>
+                        <li><a href="/th/pick/{{ user.username }}/">Play</a></li>
                     {% endif %}
-                    <li><a href="/asg/leaderboard">Leaderboard</a></li>
-                    <li><a href="/asg/about">About</a></li>
-                    <li><a href="/asg/howToPlay">How To Play</a></li>
+                    <li><a href="/th/leaderboard">Leaderboard</a></li>
+                    <li><a href="/th/about">About</a></li>
+                    <li><a href="/th/howToPlay">How To Play</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -98,6 +98,12 @@
 
 <script>
 
+    $(document).ready(function () {
+        setTimeout(function () {
+            $('#backHome').click()
+        }, 3000);
+    });
+
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
@@ -124,11 +130,27 @@
         $(".house_lock").mouseover(function () {
             $(this).animateCss('shake');
         });
-{#        $(".chests").animateCss('tada');#}
+        {#        $(".chests").animateCss('tada');#}
         $(".{{ next }}").animateCss('tada');
         $(".{{ next }}_info").animateCss('rubberBand');
 
 
+        {#        setTimeout(function(){#}
+        {#            $(".door").show();#}
+        {#            $(".door").animateCss('bounceInRight');#}
+        {#        },300);#}
+
+
+        $(".doorNext").mouseover(function () {
+            $(".door").animateCss('zoomIn');
+        });
+
+
+        $(".chestOpen").mouseover(function () {
+            $(".{{ next }}").animateCss('tada');
+            $(".{{ next }}_info").animateCss('rubberBand');
+
+        });
     });
 
 
@@ -167,11 +189,14 @@
 
     {% endif %}
 
-    $(document).ready(function () {
-        setTimeout(function () {
-            $('#backHome').click()
-        }, 3000);
-    });
+    {% if special_msg == True %}
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#special_error').modal('show');
+            }, 0);
+        });
+
+    {% endif %}
 
 
 </script>

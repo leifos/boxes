@@ -1,6 +1,8 @@
 __author__ = 'leif'
 
 import random
+from random import randint
+
 
 class YieldGenerator(object):
     # creates a patch and the payoffs in the patch
@@ -15,8 +17,8 @@ class YieldGenerator(object):
         """
         pass
 
+
 class HighYieldGenerator(YieldGenerator):
-    
     def get_yields(self, n=10):
         """
         :param n: number of yields to be generated i.e. length of document result list
@@ -28,8 +30,8 @@ class HighYieldGenerator(YieldGenerator):
 
         return yl
 
+
 class MediumYieldGenerator(YieldGenerator):
-    
     def get_yields(self, n=10):
         """
         :param n: number of yields to be generated i.e. length of document result list
@@ -41,8 +43,8 @@ class MediumYieldGenerator(YieldGenerator):
 
         return yl
 
+
 class LowYieldGenerator(YieldGenerator):
-    
     def get_yields(self, n=10):
         """
         :param n: number of yields to be generated i.e. length of document result list
@@ -50,13 +52,12 @@ class LowYieldGenerator(YieldGenerator):
         """
         yl = []
         for i in range(1):
-            yl.append(random.randint(0,self.max_yield))
+            yl.append(random.randint(0, self.max_yield))
 
         return yl
 
 
 class RandomYieldGenerator(YieldGenerator):
-
     def get_yields(self, n=10):
         """
         :param n: number of yields to be generated i.e. length of document result list
@@ -64,13 +65,12 @@ class RandomYieldGenerator(YieldGenerator):
         """
         yl = []
         for i in range(n):
-            yl.append(random.randint(0,self.max_yield))
+            yl.append(random.randint(0, self.max_yield))
 
         return yl
 
 
 class ConstantLinearYieldGenerator(YieldGenerator):
-
     def get_yields(self, n=10):
         """
         :param n: number of yields to be generated i.e. length of document result list
@@ -83,9 +83,7 @@ class ConstantLinearYieldGenerator(YieldGenerator):
         return yl
 
 
-
 class TestYieldGenerator(YieldGenerator):
-
     def __init__(self, max_yield=3):
         YieldGenerator.__init__(self, max_yield)
         self.count = 0
@@ -96,19 +94,27 @@ class TestYieldGenerator(YieldGenerator):
         :return: list of n integers (i.e. the yeilds)
         """
         yls = []
-        yls.append([3,3,3,2,2,2,1,1,1,0])
-        yls.append([1,1,1,0,0,0,0,0,0,0])
-        yls.append([2,2,2,2,1,1,0,0,0,1])
+        rdm = randint(1, 3)
+        if rdm == 1:
+            yls.append([3, 3, 3, 3, 2, 2, 2, 2, 1, 1])
+            yls.append([2, 2, 2, 2, 1, 1, 0, 0, 0, 1])
+            yls.append([1, 1, 1, 0, 0, 0, 0, 0, 0, 0])
+        elif rdm == 2:
+            yls.append([3, 3, 3, 2, 2, 2, 1, 1, 1, 0])
+            yls.append([2, 2, 2, 2, 2, 1, 1, 1, 1, 1])
+            yls.append([2, 1, 1, 1, 1, 0, 0, 0, 0, 0])
+        else:
+            yls.append([3, 3, 3, 3, 3, 2, 2, 1, 1, 1])
+            yls.append([2, 2, 2, 2, 1, 1, 1, 0, 0, 1])
+            yls.append([1, 1, 1, 1, 0, 0, 0, 0, 0, 0])
 
-
-        yl = yls[ (self.count % 3) ]
+        yl = yls[(self.count % 3)]
         self.count += 1
 
         return yl
 
 
 class TestHighYieldGenerator(YieldGenerator):
-
     def __init__(self, max_yield=3):
         YieldGenerator.__init__(self, max_yield)
         self.count = 0
@@ -119,20 +125,28 @@ class TestHighYieldGenerator(YieldGenerator):
         :return: list of n integers (i.e. the yeilds)
         """
         yls = []
-        yls.append([3,3,3,2,2,2,1,0,1,0])
-        yls.append([3,2,3,2,2,2,1,0,0,0])
-        yls.append([3,3,1,1,1,0,0,0,0,0])
-        yls.append([3,3,2,3,1,2,1,0,0,0])
-        yls.append([3,3,3,3,0,0,0,0,0,0])
 
-        yl = yls[ (self.count % 5) ]
+        i = 0
+        while i < 5:
+            rdm = randint(1, 5)
+            if rdm == 1:
+                yls.append([3, 3, 3, 2, 2, 2, 1, 0, 1, 0])
+            elif rdm == 2:
+                yls.append([3, 2, 3, 2, 2, 2, 1, 0, 0, 0])
+            elif rdm == 3:
+                yls.append([3, 3, 1, 1, 1, 0, 0, 0, 0, 0])
+            elif rdm == 4:
+                yls.append([3, 3, 2, 3, 1, 2, 1, 0, 0, 0])
+            else:
+                yls.append([3, 3, 3, 3, 0, 0, 0, 0, 0, 0])
+            i+=1
+        yl = yls[(self.count % 5)]
         self.count += 1
 
         return yl
 
 
 class TestLowYieldGenerator(YieldGenerator):
-
     def __init__(self, max_yield=3):
         YieldGenerator.__init__(self, max_yield)
         self.count = 0
@@ -143,23 +157,20 @@ class TestLowYieldGenerator(YieldGenerator):
         :return: list of n integers (i.e. the yeilds)
         """
         yls = []
-        yls.append([1,0,1,0,0,0,0,1,1,0])
-        yls.append([0,0,1,0,0,0,1,0,0,1])
-        yls.append([2,0,1,1,0,0,1,0,0,0])
-        yls.append([0,1,0,0,1,0,0,1,1,0])
-        yls.append([0,2,0,0,0,1,0,1,0,1])
+        yls.append([1, 0, 1, 0, 0, 0, 0, 1, 1, 0])
+        yls.append([0, 0, 1, 0, 0, 0, 1, 0, 0, 1])
+        yls.append([2, 0, 1, 1, 0, 0, 1, 0, 0, 0])
+        yls.append([0, 1, 0, 0, 1, 0, 0, 1, 1, 0])
+        yls.append([0, 2, 0, 0, 0, 1, 0, 1, 0, 1])
 
-        yl = yls[ (self.count % 5) ]
+        yl = yls[(self.count % 5)]
         self.count += 1
 
         return yl
 
 
-
-
 class CueGenerator(object):
-
-    def __init__(self, cue_length = 10, gain = 10, hintfactor = 0.5):
+    def __init__(self, cue_length=10, gain=10, hintfactor=0.5):
         """
         :param cue_length:
         :return:
@@ -168,7 +179,7 @@ class CueGenerator(object):
         self.gain = gain
         self.hintfactor = hintfactor
 
-    def get_labels(self, n=10, yield_list = None):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -176,16 +187,16 @@ class CueGenerator(object):
         """
         ll = []
         for i in range(n):
-            ll.append('o'*self.cue_length)
+            ll.append('o' * self.cue_length)
 
         return ll
 
     def __str__(self):
         return 'CueGenerator - Default'
 
-class FixedCueGenerator(CueGenerator):
 
-    def get_labels(self, n=10, yield_list = None):
+class FixedCueGenerator(CueGenerator):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -193,15 +204,15 @@ class FixedCueGenerator(CueGenerator):
         """
         ll = []
         for i in range(n):
-            hintspace = self.hintfactor*self.gain
-            ll.append('x'*hintspace)
-            ll.append('.'*(self.cue_length-hintspace))
+            hintspace = self.hintfactor * self.gain
+            ll.append('x' * hintspace)
+            ll.append('.' * (self.cue_length - hintspace))
             ll = random.shuffle(ll)
         return ll
 
-class VariableCueGenerator(CueGenerator):
 
-    def get_labels(self, n=10, yield_list = None):
+class VariableCueGenerator(CueGenerator):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -214,17 +225,17 @@ class VariableCueGenerator(CueGenerator):
             ygain += yield_list[i]
         ymean = ygain / len(yield_list)
         for i in range(len(yield_list)):
-            ytotal += ((yield_list[i]-ymean)*(yield_list[i]-ymean))
+            ytotal += ((yield_list[i] - ymean) * (yield_list[i] - ymean))
         ysd = ytotal / len(yield_list)
         hintspace = random.gauss(ymean, ysd)
-        ll.append('x'*hintspace)
-        ll.append('.'*(self.cue_length-hintspace))
+        ll.append('x' * hintspace)
+        ll.append('.' * (self.cue_length - hintspace))
         ll = random.shuffle(ll)
         return ll
 
-class LowInfoCueGenerator(CueGenerator):
 
-    def get_labels(self, n=10, yield_list = None):
+class LowInfoCueGenerator(CueGenerator):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -232,16 +243,16 @@ class LowInfoCueGenerator(CueGenerator):
         """
         ll = []
         for i in range(n):
-            if random.randint(0,20) < 7:
-                ll.append('o'*self.cue_length)
+            if random.randint(0, 20) < 7:
+                ll.append('o' * self.cue_length)
             else:
-                ll.append('x'*self.cue_length)
+                ll.append('x' * self.cue_length)
 
         return ll
+
 
 class MedInfoCueGenerator(CueGenerator):
-
-    def get_labels(self, n=10, yield_list = None):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -249,16 +260,16 @@ class MedInfoCueGenerator(CueGenerator):
         """
         ll = []
         for i in range(n):
-            if random.randint(0,10) < 7:
-                ll.append('o'*self.cue_length)
+            if random.randint(0, 10) < 7:
+                ll.append('o' * self.cue_length)
             else:
-                ll.append('x'*self.cue_length)
+                ll.append('x' * self.cue_length)
 
         return ll
+
 
 class LowInfoCueGenerator(CueGenerator):
-
-    def get_labels(self, n=10, yield_list = None):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -266,16 +277,16 @@ class LowInfoCueGenerator(CueGenerator):
         """
         ll = []
         for i in range(n):
-            if random.randint(0,7) < 7:
-                ll.append('o'*self.cue_length)
+            if random.randint(0, 7) < 7:
+                ll.append('o' * self.cue_length)
             else:
-                ll.append('x'*self.cue_length)
+                ll.append('x' * self.cue_length)
 
         return ll
 
-class GainBasedCueGenerator(CueGenerator):
 
-    def get_labels(self, n=10, yield_list = None):
+class GainBasedCueGenerator(CueGenerator):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -284,12 +295,12 @@ class GainBasedCueGenerator(CueGenerator):
         ll = []
         for i in range(n):
             g = yield_list[i]
-            x = int(g) * 5 + random.randint(3,10)
+            x = int(g) * 5 + random.randint(3, 10)
             dots = self.cue_length - int(x)
             if dots < 0:
                 dots = 0
 
-            ll.append('x'*x + '_'*dots)
+            ll.append('x' * x + '_' * dots)
 
         return ll
 
@@ -298,8 +309,7 @@ class GainBasedCueGenerator(CueGenerator):
 
 
 class RandGainBasedCueGenerator(CueGenerator):
-
-    def get_labels(self, n=10, yield_list = None):
+    def get_labels(self, n=10, yield_list=None):
         """
         :param n: number of labels to be generated
         :param yield_list: list of n strings (i.e. snippet labels)
@@ -308,12 +318,12 @@ class RandGainBasedCueGenerator(CueGenerator):
         ll = []
         for i in range(n):
             g = yield_list[i]
-            x = int(g) * 5 + random.randint(3,10)
+            x = int(g) * 5 + random.randint(3, 10)
             dots = self.cue_length - int(x)
             if dots < 0:
                 dots = 0
-            s = 'x'*x + '_'*dots
-            sr = ''.join(random.sample(s,len(s)))
+            s = 'x' * x + '_' * dots
+            sr = ''.join(random.sample(s, len(s)))
             ll.append(sr)
 
         return ll

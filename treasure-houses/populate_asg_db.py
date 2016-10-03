@@ -32,8 +32,8 @@ def main():
     add_game_exp('Wild Man' ,5, desc='Payoffs are High,with information.')
     add_game_exp('Rainbow' ,6, desc='Payoffs are High, Med or Low,with information.')
 
-    add_player('jill','test')
-    add_player('jim','test')
+    # add_player('jill','test')
+    # add_player('jim','test')
 
 if __name__ == "__main__":
     #os.environ.setdefault("DJANGO_SETTINGS_MODULE", "asg_project.settings")

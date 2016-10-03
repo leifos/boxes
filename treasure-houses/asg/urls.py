@@ -11,6 +11,7 @@ urlpatterns = patterns('',
                        url(r'^pick/(?P<username>[a-zA-Z0-9_.+@-]+)', views.pick, name='pick'),
                        url(r'^query/$', views.query, name='query'),
                        url(r'^assess/$', views.assess, name='assess'),
+                       url(r'^endGame/$', views.endGame, name='endGame'),
                        url(r'^players/(?P<username>[a-zA-Z0-9_.+@-]+)', views.profile_page, name='profile'),
                        url(r'^leaderboard/$', views.leaderboard, name='leaderboard'),
                        )
